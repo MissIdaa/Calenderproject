@@ -1,15 +1,20 @@
 // Interaktiv Kalender
 // Gruppeprojekt Aleksander, Caroline, Ida og Mads
+Bruger b;
+Layout l;
+
+color tema = color(75,75,255);
 
 
 void setup(){
-size(500,500);  
-  
-  
+size(1200,700);  
+b = new Bruger("Caroline");
+l = new Layout();
 }
 
 void draw(){
-  background(255);
-  
+  background(tema);
+  b.display();
+  l.display();
   
 }
