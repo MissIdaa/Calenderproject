@@ -9,21 +9,21 @@
 
 Bruger b;
 Layout l;
-//PImage sol,regn,skyet;
+PImage sol,regn,skyet;
 
 color tema = color(75,75,255);
 
 
 void setup(){
-size(x,y);  
+fullScreen();  
 b = new Bruger("Caroline");
 l = new Layout();
 
-//sol = loadImage("sol.png");
+sol = loadImage("sol.jpg");
 }
 
 void draw(){
-  background(tema);
+  background(sol);
   b.display();
   l.display();
   

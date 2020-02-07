@@ -9,6 +9,7 @@ class Bruger {
   }
 
   void display() {
+    textSize(35);
     text(name, 50, 100);
   }
 }
