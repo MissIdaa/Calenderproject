@@ -1,5 +1,5 @@
 // Interaktiv Kalender
-// Gruppeprojekt Aleksander, Caroline, Ida og Mads
+// Gruppeprojekt Aleksander, Caroline, Ida, Mads og Lucas
 
 // Hans Christian hjælpesager:
 // Datamine vejrudsigten

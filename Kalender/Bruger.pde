@@ -5,11 +5,12 @@ class Bruger {
   Bruger(String tempName) {
     name = tempName;
     myFont = createFont("Cooper Black", 35);
-    textFont(myFont);
   }
 
   void display() {
-    textSize(35);
+    textFont(myFont);
+    textSize(70);
+    fill(255);
     text(name, 50, 100);
   }
 }

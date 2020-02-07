@@ -1,7 +1,9 @@
 class Layout {
   String[] ugenavne = {"Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag"};
-
+  int dage = 1;
+  PFont font;
   Layout() {
+    font = createFont("Abadi", 50);
   }
 
   void display() {
@@ -15,6 +17,7 @@ class Layout {
      }
      */
     textSize(50);
+    textFont(font);
     for (int i = 0; i < 7; i++) {
       for (int j = 0; j < 6; j++) {
         if (i == 0 || i == 2 || i == 4 || i == 6) {
@@ -26,5 +29,16 @@ class Layout {
       text(ugenavne[i], 125+(i*(1720/7)), 270);
       fill(255);
     }
+    for (int j = 1; j < 6; j++) {
+      for (int i = 0; i < 7; i++) {
+        fill(0);
+        text(dage, 110+(i*(1720/7)), 250+((j)*(780/6)));
+        dage++;
+        if (dage > 31) {
+          dage = 1;
+        }
+      }
+    }
+    dage = 1;
   }
 }
