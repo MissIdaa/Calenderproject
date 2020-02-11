@@ -17,12 +17,13 @@
 import processing.serial.*;
 import java.util.Calendar;
 
+ArrayList<droplet> regn = new ArrayList<droplet>();
 ArrayList<Bruger> brugere = new ArrayList<Bruger>();
 Layout l;
 Calendar calendar;
 
 PImage[] Baggrund = new PImage[2]; 
-//PImage img, sol, skyet;
+
 
 Serial myPort;
 String dataWemos = "Intet endnu";
@@ -32,6 +33,7 @@ color tema = color(75, 75, 255);
 int CurrentUser;
 String vejrgrader;
 String vejrstatus;
+boolean run = true;
 
 //Cloud
 float x1, x2, x3, dx; 
@@ -45,16 +47,17 @@ void setup() {
   brugere.add(new Bruger("Ida"));
 
   l = new Layout();
-
+/*
   String portName = Serial.list() [2];
   println("Proever: " + portName);
   myPort = new Serial(this, portName, 115200);
-
+*/
   Baggrund[0] = loadImage("sol.png");
   Baggrund[1] = loadImage("skyet.png");
 
+
   vejrdata();
-  
+
   // Cloud variabler 
   cloud = loadImage("cloud.png");
   y=-200;
@@ -62,19 +65,26 @@ void setup() {
   x2=x1+1500;   // plads mellem skyer
   x3=x2+1250;   // plads mellem skyer
   dx = -2; // cloud speed
-  
-  
-  
+
+
+
   // nyhedsdata();
 }
 
 void draw() {
   background(Baggrund[CurrentUser]);
   Cloud();
-  chiplogin();
-  brugere.get(CurrentUser).display();
+ // chiplogin();
+ // brugere.get(CurrentUser).display();
   l.display();
   text(vejrgrader, 200, 200);
+
+    regn.add(new droplet( new PVector (random(0, width), -100), new PVector(random(0, -100), random(20, 40))));
+
+  for (droplet d : regn) {
+    d.display();
+    d.update();
+  }
 }
 
 void vejrdata() {
@@ -103,11 +113,11 @@ void nyhedsdata() {
     println(lines[i]);
   }
 }
-
+/*
 void chiplogin() {
   if (myPort.available() > 0) {
     dataWemos = myPort.readStringUntil ('\n');
- //   println("Received: " + dataWemos);
+    //   println("Received: " + dataWemos);
     if (dataWemos != null) {
       if (dataWemos.charAt(10) == '#') {
         kortNum = dataWemos.substring(11, dataWemos.length()-3);
@@ -115,9 +125,10 @@ void chiplogin() {
     }
   }
   CurrentUser = int(kortNum);
- // println(kortNum);
+  // println(kortNum);
   text(CurrentUser, 500, 100);
 }
+*/
 
 void Cloud () {
   x1 += dx;
@@ -136,5 +147,4 @@ void Cloud () {
   if (x3 <= -1200) { // Flytter skyen, alle 3 statements flytter skyne over på den modsatte side af canvas 
     x3 = x2 + 1200;
   }
-
 }
