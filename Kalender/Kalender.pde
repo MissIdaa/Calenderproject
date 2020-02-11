@@ -15,11 +15,6 @@
 // Brug PrintWriter, createWriter, createrReader og libary til at vælge den rigtige fil.
 // Lave en smart måde at tilegne begivenhederne navne.
 
-//Cloud
-float x1, x2, x3, dx; 
-PImage cloud;
-float y;
-//Cloud
 
 import processing.serial.*;
 
@@ -36,6 +31,11 @@ color tema = color(75, 75, 255);
 int CurrentUser;
 String vejrgrader;
 String vejrstatus;
+
+//Cloud
+float x1, x2, x3, dx; 
+PImage cloud;
+float y;
 
 void setup() {
   fullScreen();
