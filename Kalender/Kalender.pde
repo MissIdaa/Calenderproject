@@ -28,7 +28,7 @@ void setup() {
   b = new Bruger("Caroline");
   l = new Layout();
 
-  sol = loadImage("sol.jpg");
+  sol = loadImage("skyet.png");
   data();
 }
 
