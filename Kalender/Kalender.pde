@@ -19,7 +19,8 @@ import processing.serial.*;
 
 ArrayList<Bruger> brugere = new ArrayList<Bruger>();
 Layout l;
-PImage sol, regn, skyet;
+PImage[] Baggrund = new PImage[2]; 
+//PImage img, sol, skyet;
 
 Serial myPort;
 String dataWemos = "Intet endnu";
@@ -42,13 +43,15 @@ void setup() {
   println("Proever: " + portName);
   myPort = new Serial(this, portName, 115200);
 
-  sol = loadImage("sol.jpg");
+  Baggrund[0] = loadImage("sol.png");
+  Baggrund[1] = loadImage("skyet.png");
+
   vejrdata();
   // nyhedsdata();
 }
 
 void draw() {
-  background(sol);
+  background(Baggrund[CurrentUser]);
   chiplogin();
   brugere.get(CurrentUser).display();
   l.display();
