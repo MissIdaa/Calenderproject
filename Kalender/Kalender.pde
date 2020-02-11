@@ -2,8 +2,6 @@
 // Gruppeprojekt Aleksander, Caroline, Ida, Mads og Lucas
 
 // Hans Christian hjælpesager:
-// Datamine vejrudsigten tjek
-// se datamining
 
 // Hvordan skal vi lave objekterne/begivenhedsgem
 //Vi laver hver begivenhed som et objekt
@@ -17,9 +15,12 @@
 
 
 import processing.serial.*;
+import java.util.Calendar;
 
 ArrayList<Bruger> brugere = new ArrayList<Bruger>();
 Layout l;
+Calendar calendar;
+
 PImage[] Baggrund = new PImage[2]; 
 //PImage img, sol, skyet;
 
@@ -106,7 +107,7 @@ void nyhedsdata() {
 void chiplogin() {
   if (myPort.available() > 0) {
     dataWemos = myPort.readStringUntil ('\n');
-    println("Received: " + dataWemos);
+ //   println("Received: " + dataWemos);
     if (dataWemos != null) {
       if (dataWemos.charAt(10) == '#') {
         kortNum = dataWemos.substring(11, dataWemos.length()-3);
@@ -114,7 +115,7 @@ void chiplogin() {
     }
   }
   CurrentUser = int(kortNum);
-  println(kortNum);
+ // println(kortNum);
   text(CurrentUser, 500, 100);
 }
 
