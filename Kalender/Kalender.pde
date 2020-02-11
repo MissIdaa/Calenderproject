@@ -56,7 +56,7 @@ void setup() {
   
   // Cloud variabler 
   cloud = loadImage("cloud.png");
-  y=0;
+  y=-200;
   x1=0;         // plads mellem skyer
   x2=x1+1500;   // plads mellem skyer
   x3=x2+1250;   // plads mellem skyer
@@ -69,6 +69,7 @@ void setup() {
 
 void draw() {
   background(Baggrund[CurrentUser]);
+  Cloud();
   chiplogin();
   brugere.get(CurrentUser).display();
   l.display();
