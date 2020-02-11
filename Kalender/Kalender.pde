@@ -15,6 +15,12 @@
 // Brug PrintWriter, createWriter, createrReader og libary til at vælge den rigtige fil.
 // Lave en smart måde at tilegne begivenhederne navne.
 
+//Cloud
+float x1, x2, x3, dx; 
+PImage cloud;
+float y;
+//Cloud
+
 import processing.serial.*;
 
 ArrayList<Bruger> brugere = new ArrayList<Bruger>();
@@ -44,6 +50,17 @@ void setup() {
 
   sol = loadImage("sol.jpg");
   vejrdata();
+  
+  // Cloud variabler 
+  cloud = loadImage("cloud.png");
+  y=0;
+  x1=0;         // plads mellem skyer
+  x2=x1+1500;   // plads mellem skyer
+  x3=x2+1250;   // plads mellem skyer
+  dx = -2; // cloud speed
+  
+  
+  
   // nyhedsdata();
 }
 
@@ -95,4 +112,24 @@ void chiplogin() {
   CurrentUser = int(kortNum);
   println(kortNum);
   text(CurrentUser, 500, 100);
+}
+
+void Cloud () {
+  x1 += dx;
+  x2 += dx;
+  x3 += dx;
+  image(cloud, x1, y);
+  image(cloud, x2, y);
+  image(cloud, x3, y);
+
+  if (x1 <= -1200) { // flytter skyen 
+    x1 = x3 + 1200;
+  } 
+  if (x2 <= -1200) { // Flytter skyen 
+    x2 = x1 + 1200;
+  } 
+  if (x3 <= -1200) { // Flytter skyen, alle 3 statements flytter skyne over på den modsatte side af canvas 
+    x3 = x2 + 1200;
+  }
+
 }
