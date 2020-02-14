@@ -47,11 +47,11 @@ void setup() {
   brugere.add(new Bruger("Ida"));
 
   l = new Layout();
-/*
+  /*
   String portName = Serial.list() [2];
-  println("Proever: " + portName);
-  myPort = new Serial(this, portName, 115200);
-*/
+   println("Proever: " + portName);
+   myPort = new Serial(this, portName, 115200);
+   */
   Baggrund[0] = loadImage("sol.png");
   Baggrund[1] = loadImage("skyet.png");
 
@@ -74,17 +74,17 @@ void setup() {
 void draw() {
   background(Baggrund[CurrentUser]);
   Cloud();
- // chiplogin();
- // brugere.get(CurrentUser).display();
+  // chiplogin();
+  // brugere.get(CurrentUser).display();
   l.display();
   text(vejrgrader, 200, 200);
-
-    regn.add(new droplet( new PVector (random(0, width), -100), new PVector(random(0, -100), random(20, 40))));
-
+/*
+  regn.add(new droplet( new PVector (random(0, width), -100), new PVector(random(0, -100), random(20, 40))));
   for (droplet d : regn) {
     d.display();
     d.update();
   }
+  */
 }
 
 void vejrdata() {
@@ -115,20 +115,20 @@ void nyhedsdata() {
 }
 /*
 void chiplogin() {
-  if (myPort.available() > 0) {
-    dataWemos = myPort.readStringUntil ('\n');
-    //   println("Received: " + dataWemos);
-    if (dataWemos != null) {
-      if (dataWemos.charAt(10) == '#') {
-        kortNum = dataWemos.substring(11, dataWemos.length()-3);
-      }
-    }
-  }
-  CurrentUser = int(kortNum);
-  // println(kortNum);
-  text(CurrentUser, 500, 100);
-}
-*/
+ if (myPort.available() > 0) {
+ dataWemos = myPort.readStringUntil ('\n');
+ //   println("Received: " + dataWemos);
+ if (dataWemos != null) {
+ if (dataWemos.charAt(10) == '#') {
+ kortNum = dataWemos.substring(11, dataWemos.length()-3);
+ }
+ }
+ }
+ CurrentUser = int(kortNum);
+ // println(kortNum);
+ text(CurrentUser, 500, 100);
+ }
+ */
 
 void Cloud () {
   x1 += dx;
@@ -147,4 +147,13 @@ void Cloud () {
   if (x3 <= -1200) { // Flytter skyen, alle 3 statements flytter skyne over på den modsatte side af canvas 
     x3 = x2 + 1200;
   }
+}
+void mousePressed() {
+  if (l.mus == false) {
+    l.mus = true;
+  } else if (l.mus == true) { 
+    l.mus = false;
+  }
+  l.pos.x = mouseX;
+  l.pos.y = mouseY;
 }
