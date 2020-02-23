@@ -23,7 +23,7 @@ class Layout {
     x1=0;         // plads mellem skyer
     x2=x1+1500;   // plads mellem skyer
     x3=x2+1250;   // plads mellem skyer
-    dx = -2; // cloud speed
+    dx = -0.5; // cloud speed
 
     // Opsætning af layout
     int dato = 0;
