@@ -7,7 +7,6 @@
 //Vi laver hver begivenhed som et objekt
 // Hvert objekt har deres ejer og dato som variabler
 
-
 // Gemme objekternes begivenheder til en bruger
 // Objekterne/begivenhederne gemmes i hver deres fil, med deres dato og deres ejer(bruger)
 // Brug PrintWriter, createWriter, createrReader og libary til at vælge den rigtige fil.
@@ -20,24 +19,13 @@ import java.util.Calendar;
 // Arraylister og objkter til klasser
 ArrayList<droplet> regn = new ArrayList<droplet>();
 ArrayList<Bruger> brugere = new ArrayList<Bruger>();
+Serial myPort;
 Layout l;
 Calendar calendar;
-
-PImage[] Baggrund = new PImage[2]; 
-
-// Datamining variabler
-Serial myPort;
-String dataWemos = "Intet endnu";
-String kortNum = "Intet endnu"; 
-String vejrgrader;
-String vejrstatus;
-
-//Cloud
-float x1, x2, x3, dx; 
-PImage cloud;
-float y;
+Vejrudsigt vejr;
 
 // Andre
+PImage[] Baggrund = new PImage[2]; 
 color tema = color(75, 75, 255);
 int CurrentUser;
 boolean run = true;
@@ -49,8 +37,9 @@ void setup() {
   brugere.add(new Bruger("Caroline"));
   brugere.add(new Bruger("Ida"));
 
-  // Layoutsobjekt, her kunne det bedre spredes ud
+  // Oprettelse af objekter
   l = new Layout();
+  vejr = new Vejrudsigt();
 
   /*
 // Opsætning af serial port
@@ -62,27 +51,15 @@ void setup() {
   // Indlæsning af de forskellige baggrundsmuligheder
   Baggrund[0] = loadImage("sol.png");
   Baggrund[1] = loadImage("skyet.png");
-
-  // indlæser vejrudsigtens status
-  vejrdata();
-
-  // Cloud variabler 
-  cloud = loadImage("cloud.png");
-  y=-200;
-  x1=0;         // plads mellem skyer
-  x2=x1+1500;   // plads mellem skyer
-  x3=x2+1250;   // plads mellem skyer
-  dx = -2; // cloud speed
 }
 
 // Her køres funktionerne
 void draw() {
   background(Baggrund[CurrentUser]);
-  Cloud();
   // chiplogin();
   // brugere.get(CurrentUser).display();
   l.display();
-  //  text(vejrgrader, 200, 200);
+  vejr.display();
 
   /*
   // Regn animation
@@ -92,26 +69,6 @@ void draw() {
    d.update();
    }
    */
-}
-
-//--------------------------------------------------------------------------------------------
-// Datamining for vejrstatus, grader osv
-void vejrdata() {
-  String[] lines = loadStrings("https://vejr.tv2.dk/vejr/hjoerring-2620214");
-  println(lines[180]);
-
-  int pointst = lines[180].indexOf("<td");
-  int pointsl = lines[180].indexOf("</td>", pointst);
-
-
-  //  vejrgrader = (lines[180].substring(pointst+20, pointsl));
-
-  pointst = lines[179].indexOf("alt");
-  pointsl = lines[179].indexOf("/></td>", pointst); 
-
-  // vejrstatus = (lines[179].substring(pointst+4, pointsl-1));
-
-  //  println(vejrstatus);
 }
 
 //-------------------------------------------------------------------------
@@ -132,27 +89,6 @@ void chiplogin() {
  text(CurrentUser, 500, 100);
  }
  */
-
-//-----------------------------------------------------------------
-// Skyanimation
-void Cloud () {
-  x1 += dx;
-  x2 += dx;
-  x3 += dx;
-  image(cloud, x1, y);
-  image(cloud, x2, y);
-  image(cloud, x3, y);
-
-  if (x1 <= -1200) { // flytter skyen 
-    x1 = x3 + 1200;
-  } 
-  if (x2 <= -1200) { // Flytter skyen 
-    x2 = x1 + 1200;
-  } 
-  if (x3 <= -1200) { // Flytter skyen, alle 3 statements flytter skyne over på den modsatte side af canvas 
-    x3 = x2 + 1200;
-  }
-}
 
 //-----------------------------------------------------------------
 // Til begivenhedsbokse

@@ -3,8 +3,6 @@ class droplet {
   PVector pos;
   PVector v;
 
-
-
   droplet(PVector tempPos, PVector tempV) {
     pos = tempPos.copy();
     v = tempV.copy();
