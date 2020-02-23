@@ -4,7 +4,7 @@ class Vejrudsigt {
   String vejrstatus;
   Vejrudsigt() {
 
-
+    
     vejrdata();
   }
 

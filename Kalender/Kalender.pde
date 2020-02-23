@@ -19,6 +19,7 @@ import java.util.Calendar;
 // Arraylister og objkter til klasser
 ArrayList<droplet> regn = new ArrayList<droplet>();
 ArrayList<Bruger> brugere = new ArrayList<Bruger>();
+ArrayList<Boks> bokse = new ArrayList<Boks>();
 Serial myPort;
 Layout l;
 Calendar calendar;
@@ -58,8 +59,17 @@ void draw() {
   background(Baggrund[CurrentUser]);
   // chiplogin();
   // brugere.get(CurrentUser).display();
+  
+  //Display af kalenderens generelle layout
   l.display();
+  
+  // Display af vejret
   vejr.display();
+  
+  // Display af dagene
+  for (Boks b : bokse) {
+    b.display();
+  }
 
   /*
   // Regn animation
@@ -74,7 +84,7 @@ void draw() {
 //-------------------------------------------------------------------------
 /*
 // Arduino chips
-void chiplogin() {
+ void chiplogin() {
  if (myPort.available() > 0) {
  dataWemos = myPort.readStringUntil ('\n');
  //   println("Received: " + dataWemos);
@@ -92,12 +102,14 @@ void chiplogin() {
 
 //-----------------------------------------------------------------
 // Til begivenhedsbokse
+/*
 void mousePressed() {
-  if (l.mus == false) {
-    l.mus = true;
-  } else if (l.mus == true) { 
-    l.mus = false;
-  }
-  l.pos.x = mouseX;
-  l.pos.y = mouseY;
-}
+ if (l.mus == false) {
+ l.mus = true;
+ } else if (l.mus == true) { 
+ l.mus = false;
+ }
+ l.pos.x = mouseX;
+ l.pos.y = mouseY;
+ }
+ */
