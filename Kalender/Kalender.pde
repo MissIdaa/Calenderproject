@@ -3,7 +3,6 @@
 
 // Hans Christian hjælpesager:
 
-// Hvordan skal vi lave objekterne/begivenhedsgem
 //Vi laver hver begivenhed som et objekt
 // Hvert objekt har deres ejer og dato som variabler
 
@@ -98,19 +97,5 @@ void draw() {
  CurrentUser = int(kortNum);
  // println(kortNum);
  text(CurrentUser, 500, 100);
- }
- */
-
-//-----------------------------------------------------------------
-// Til begivenhedsbokse
-/*
-void mousePressed() {
- if (l.mus == false) {
- l.mus = true;
- } else if (l.mus == true) { 
- l.mus = false;
- }
- l.pos.x = mouseX;
- l.pos.y = mouseY;
  }
  */
