@@ -30,7 +30,7 @@ class Boks {
   }
 
   void update() {
-    if (dato != 0 && withinRect() && mousePressed) {
+    if (dato != 0 && withinRect() && mousePressed && bgrun == false) {
       text(marked_date, mouseX, mouseY);
       bgrun = true;
       bgdato = marked_date;

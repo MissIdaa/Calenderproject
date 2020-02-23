@@ -3,6 +3,8 @@ class Begivenhed {
   float gem_ypos = height/2+325;
   float gem_w = 80;
   float gem_h = 50;
+  int type;
+  String besked;
   
 
   Begivenhed() {
@@ -26,7 +28,8 @@ void display(){
     
     if (withinRect() && mousePressed){
       bgrun = false;
-
+      output.println(bgdato);
+      output.println(brugere.get(CurrentUser).name + "t" + type + "t" + besked);
     }
     
   }

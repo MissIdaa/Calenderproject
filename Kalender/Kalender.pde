@@ -33,11 +33,18 @@ boolean run = true;
 boolean bgrun = false;
 int bgdato;
 PrintWriter output;
-  
+
 void setup() {
   fullScreen();
+  String[] lines = loadStrings("C:/Users/aleks/Desktop/HTX 3.G/Tekningfag - Digital design/GitHub/Flappy_bird2/Calenderproject/Kalender/Begivenheder.txt");
+  output = createWriter("Begivenheder.txt");
+  if ( lines != null) {
+    for (int i = 0; i < lines.length; i++) {
+      output.println(lines[i]);
+    }
+  }
 
-BufferedReader reader = createReader("Begivenheder.txt");
+  BufferedReader reader = createReader("Begivenheder.txt");
 
   // Tilføjelse af brugere, mulighed for tilføjelse af flere skal implementeres
   brugere.add(new Bruger("Caroline"));
@@ -78,11 +85,11 @@ void draw() {
     b.display();
     b.update();
   }
-  if (bgrun == true){
+  if (bgrun == true) {
     bg.display();
-bg.update();
+    bg.update();
   }
-  
+  //text(bgdato,100,100);
   /*
   // Regn animation
    regn.add(new droplet( new PVector (random(0, width), -100), new PVector(random(0, -100), random(20, 40))));
@@ -111,9 +118,3 @@ bg.update();
  text(CurrentUser, 500, 100);
  }
  */
- 
-void keyPressed(){
-  if(key == 'o'){
-   output = createWriter("Begivenheder.txt"); 
-  }
-}
