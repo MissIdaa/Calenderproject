@@ -26,8 +26,15 @@ class Layout {
     dx = -2; // cloud speed
 
     // Opsætning af layout
-    for (int i = 0; i < 7; i++) {
-      for (int j = 0; j < 6; j++) {
+    int dato = 0;
+    for (int j = 0; j < 6; j++) {
+      for (int i = 0; i < 7; i++) {
+        if (j != 0) {
+          dato++;
+          if (dato > 31) {
+            dato = 1;
+          }
+        }
         if (i == 0 || i == 2 || i == 4 || i == 6) {
           farve = color(162, 222, 232);
         } else {
@@ -38,45 +45,12 @@ class Layout {
         } else {
           ugedag = null;
         }
-        bokse.add(new Boks(100+(i*(1720/7)), 200+(j*(780/6)), farve, ugedag));
+        bokse.add(new Boks(100+(i*(1720/7)), 200+(j*(780/6)), farve, ugedag, dato));
       }
     }
   }
 
   void display() {
-    baggrund();
-
-    // Her skal der seriøst laves om og gøres rent
-    //----------------------------------------------------------
-
-    for (int j = 1; j < 6; j++) {
-      for (int i = 0; i < 7; i++) {
-        fill(0);
-        text(dage, 110+(i*(1720/7)), 250+((j)*(780/6)));
-        dage++;
-        if (dage > 31) {
-          dage = 1;
-        }
-      }
-    }
-    dage = 1;
-
-    fill(0);
-    for (int i = 0; i < 6; i++) {
-      for (int j = 0; j < 4; j++) {
-        if (withinRect(mouseX, mouseY, 100+((1+i)*(1720/7)), 200+((j+2)*(780/6)), 1720/7, 780/6) && mus ) {
-
-          fill(255);
-          rect(pos.x, pos.y, 500, 500);
-        }
-      }
-    }
-    fill(255);
-  }
-
-  void baggrund() {
-
-
 
 
     // Animerede skyer
@@ -95,15 +69,6 @@ class Layout {
     } 
     if (x3 <= -1200) { // Flytter skyen, alle 3 statements flytter skyne over på den modsatte side af canvas 
       x3 = x2 + 1200;
-    }
-  }
-
-
-  boolean withinRect(float x, float y, float a, float b, float w, float h) {
-    if (dist(x, 0, a, 0)<= w && dist(0, y, 0, b)<=h) {
-      return true;
-    } else {
-      return false;
     }
   }
 }

@@ -59,16 +59,17 @@ void draw() {
   background(Baggrund[CurrentUser]);
   // chiplogin();
   // brugere.get(CurrentUser).display();
-  
+
   //Display af kalenderens generelle layout
   l.display();
-  
+
   // Display af vejret
   vejr.display();
-  
+
   // Display af dagene
   for (Boks b : bokse) {
     b.display();
+    b.update();
   }
 
   /*
