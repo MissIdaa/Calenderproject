@@ -13,10 +13,11 @@
 // Brug PrintWriter, createWriter, createrReader og libary til at vælge den rigtige fil.
 // Lave en smart måde at tilegne begivenhederne navne.
 
-
+// Bibliotek af objekter og metoder vi skal bruge
 import processing.serial.*;
 import java.util.Calendar;
 
+// Arraylister og objkter til klasser
 ArrayList<droplet> regn = new ArrayList<droplet>();
 ArrayList<Bruger> brugere = new ArrayList<Bruger>();
 Layout l;
@@ -24,38 +25,45 @@ Calendar calendar;
 
 PImage[] Baggrund = new PImage[2]; 
 
-
+// Datamining variabler
 Serial myPort;
 String dataWemos = "Intet endnu";
 String kortNum = "Intet endnu"; 
-
-color tema = color(75, 75, 255);
-int CurrentUser;
 String vejrgrader;
 String vejrstatus;
-boolean run = true;
 
 //Cloud
 float x1, x2, x3, dx; 
 PImage cloud;
 float y;
 
+// Andre
+color tema = color(75, 75, 255);
+int CurrentUser;
+boolean run = true;
+
 void setup() {
   fullScreen();
-  //size(1920,1080);
+
+  // Tilføjelse af brugere, mulighed for tilføjelse af flere skal implementeres
   brugere.add(new Bruger("Caroline"));
   brugere.add(new Bruger("Ida"));
 
+  // Layoutsobjekt, her kunne det bedre spredes ud
   l = new Layout();
+
   /*
-  String portName = Serial.list() [2];
+// Opsætning af serial port
+   String portName = Serial.list() [2];
    println("Proever: " + portName);
    myPort = new Serial(this, portName, 115200);
    */
+
+  // Indlæsning af de forskellige baggrundsmuligheder
   Baggrund[0] = loadImage("sol.png");
   Baggrund[1] = loadImage("skyet.png");
 
-
+  // indlæser vejrudsigtens status
   vejrdata();
 
   // Cloud variabler 
@@ -65,55 +73,50 @@ void setup() {
   x2=x1+1500;   // plads mellem skyer
   x3=x2+1250;   // plads mellem skyer
   dx = -2; // cloud speed
-
-
-
-  // nyhedsdata();
 }
 
+// Her køres funktionerne
 void draw() {
   background(Baggrund[CurrentUser]);
   Cloud();
   // chiplogin();
   // brugere.get(CurrentUser).display();
   l.display();
-  text(vejrgrader, 200, 200);
-/*
-  regn.add(new droplet( new PVector (random(0, width), -100), new PVector(random(0, -100), random(20, 40))));
-  for (droplet d : regn) {
-    d.display();
-    d.update();
-  }
-  */
+  //  text(vejrgrader, 200, 200);
+
+  /*
+  // Regn animation
+   regn.add(new droplet( new PVector (random(0, width), -100), new PVector(random(0, -100), random(20, 40))));
+   for (droplet d : regn) {
+   d.display();
+   d.update();
+   }
+   */
 }
 
+//--------------------------------------------------------------------------------------------
+// Datamining for vejrstatus, grader osv
 void vejrdata() {
   String[] lines = loadStrings("https://vejr.tv2.dk/vejr/hjoerring-2620214");
-  // println(lines[180]);
+  println(lines[180]);
 
   int pointst = lines[180].indexOf("<td");
   int pointsl = lines[180].indexOf("</td>", pointst);
 
-  vejrgrader = (lines[180].substring(pointst+20, pointsl));
+
+  //  vejrgrader = (lines[180].substring(pointst+20, pointsl));
 
   pointst = lines[179].indexOf("alt");
   pointsl = lines[179].indexOf("/></td>", pointst); 
 
-  vejrstatus = (lines[179].substring(pointst+4, pointsl-1));
+  // vejrstatus = (lines[179].substring(pointst+4, pointsl-1));
 
-  println(vejrstatus);
+  //  println(vejrstatus);
 }
 
-void nyhedsdata() {
-  String[] lines = loadStrings("https://www.dr.dk/nyheder"); 
-  //println(lines[i]);
-  // println(lines.length);
-  for (int i = 1600; i < 1800; i++) {
-    //  String[] timeMatch = match(lines[i], "Seneste nyt");
-    println(lines[i]);
-  }
-}
+//-------------------------------------------------------------------------
 /*
+// Arduino chips
 void chiplogin() {
  if (myPort.available() > 0) {
  dataWemos = myPort.readStringUntil ('\n');
@@ -130,6 +133,8 @@ void chiplogin() {
  }
  */
 
+//-----------------------------------------------------------------
+// Skyanimation
 void Cloud () {
   x1 += dx;
   x2 += dx;
@@ -148,6 +153,9 @@ void Cloud () {
     x3 = x2 + 1200;
   }
 }
+
+//-----------------------------------------------------------------
+// Til begivenhedsbokse
 void mousePressed() {
   if (l.mus == false) {
     l.mus = true;
