@@ -23,15 +23,21 @@ Serial myPort;
 Layout l;
 Calendar calendar;
 Vejrudsigt vejr;
+Begivenhed bg;
 
 // Andre
 PImage[] Baggrund = new PImage[2]; 
 color tema = color(75, 75, 255);
 int CurrentUser;
 boolean run = true;
-
+boolean bgrun = false;
+int bgdato;
+PrintWriter output;
+  
 void setup() {
   fullScreen();
+
+BufferedReader reader = createReader("Begivenheder.txt");
 
   // Tilføjelse af brugere, mulighed for tilføjelse af flere skal implementeres
   brugere.add(new Bruger("Caroline"));
@@ -40,6 +46,7 @@ void setup() {
   // Oprettelse af objekter
   l = new Layout();
   vejr = new Vejrudsigt();
+  bg = new Begivenhed();
 
   /*
 // Opsætning af serial port
@@ -61,6 +68,7 @@ void draw() {
 
   //Display af kalenderens generelle layout
   l.display();
+  l.update();
 
   // Display af vejret
   vejr.display();
@@ -70,7 +78,11 @@ void draw() {
     b.display();
     b.update();
   }
-
+  if (bgrun == true){
+    bg.display();
+bg.update();
+  }
+  
   /*
   // Regn animation
    regn.add(new droplet( new PVector (random(0, width), -100), new PVector(random(0, -100), random(20, 40))));
@@ -99,3 +111,9 @@ void draw() {
  text(CurrentUser, 500, 100);
  }
  */
+ 
+void keyPressed(){
+  if(key == 'o'){
+   output = createWriter("Begivenheder.txt"); 
+  }
+}

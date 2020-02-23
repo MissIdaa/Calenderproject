@@ -7,11 +7,17 @@ class Layout {
   boolean mus = false;
   PVector pos = new PVector();
 
-  // Baggrund
   //Skyer
   float x1, x2, x3, dx; 
   PImage cloud;
   float y;
+
+  // afslut knap
+  float afslut_xpos = width-125;
+  float afslut_ypos = height-75;
+  float afslut_w = 100;
+  float afslut_h = 50;
+
 
   Layout() {
     font = createFont("Abadi", 50);
@@ -23,14 +29,16 @@ class Layout {
     x1=0;         // plads mellem skyer
     x2=x1+1500;   // plads mellem skyer
     x3=x2+1250;   // plads mellem skyer
-    dx = -2; // cloud speed
+    dx = -0.5; // cloud speed
 
     // Opsætning af layout
     int dato = 0;
+    int sumdato = 0;
     for (int j = 0; j < 6; j++) {
       for (int i = 0; i < 7; i++) {
         if (j != 0) {
           dato++;
+          sumdato++;
           if (dato > 31) {
             dato = 1;
           }
@@ -45,13 +53,18 @@ class Layout {
         } else {
           ugedag = null;
         }
-        bokse.add(new Boks(100+(i*(1720/7)), 200+(j*(780/6)), farve, ugedag, dato));
+        bokse.add(new Boks(100+(i*(1720/7)), 200+(j*(780/6)), farve, ugedag, dato,sumdato));
       }
     }
   }
 
   void display() {
-
+    // Aflsut knap
+    fill(255);
+    rect(afslut_xpos, afslut_ypos, afslut_w, afslut_h);
+    fill(0);
+    textSize(23);
+    text("AFSLUT", afslut_xpos+5, afslut_ypos+30);
 
     // Animerede skyer
     x1 += dx;
@@ -69,6 +82,21 @@ class Layout {
     } 
     if (x3 <= -1200) { // Flytter skyen, alle 3 statements flytter skyne over på den modsatte side af canvas 
       x3 = x2 + 1200;
+    }
+  }
+  void update() {
+
+    if (withinRect() && mousePressed) {
+      output.flush();
+      output.close();
+      exit();
+    }
+  }
+  boolean withinRect() {
+    if (dist(mouseX, 0, afslut_xpos+(afslut_w/2), 0)<= afslut_w/2 && dist(0, mouseY, 0, (afslut_ypos+afslut_h/2))<=afslut_h/2) {
+      return true;
+    } else {
+      return false;
     }
   }
 }

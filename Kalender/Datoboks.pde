@@ -5,13 +5,16 @@ class Boks {
   color farve;
   String ugedag;
   int dato;
+  int marked_date;
 
-  Boks(float tempXpos, float tempYpos, color tempFarve, String tempUgedag, int tempDato) {
+
+  Boks(float tempXpos, float tempYpos, color tempFarve, String tempUgedag, int tempDato, int tempMarked_date) {
     xpos = tempXpos;
     ypos = tempYpos;
     farve = tempFarve;
     ugedag = tempUgedag;
     dato = tempDato;
+    marked_date = tempMarked_date;
   }
 
   void display() {
@@ -28,7 +31,9 @@ class Boks {
 
   void update() {
     if (dato != 0 && withinRect() && mousePressed) {
-      text(dato, mouseX, mouseY);
+      text(marked_date, mouseX, mouseY);
+      bgrun = true;
+      bgdato = marked_date;
     }
   }
 
