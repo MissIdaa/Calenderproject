@@ -9,26 +9,33 @@ class Vejrudsigt {
   }
 
   void display() {
-//    text(vejrgrader, 200, 200);
-//   text(vejrstatus, 200, 300);
+    fill(255);
+    rect(1500,50,200,100);
+    fill(0);
+    textSize(25);
+    text("Vejret lige nu:",1520,75);
+   text(vejrgrader+" grader", 1510, 105);
+   text(vejrstatus, 1510, 130);
+   textSize(50);
   }
 
   // Datamining for vejrstatus, grader osv
   void vejrdata() {
     String[] lines = loadStrings("https://vejr.tv2.dk/vejr/hjoerring-2620214");
-    println(lines[180]);
 
-    int pointst = lines[180].indexOf("<td");
-    int pointsl = lines[180].indexOf("</td>", pointst);
+   // println(lines[180]);
+
+    int pointst = lines[183].indexOf("<td");
+    int pointsl = lines[183].indexOf("</td>", pointst);
 
 
-    //  vejrgrader = (lines[180].substring(pointst+20, pointsl));
-    // println(vejrgrader);
+      vejrgrader = (lines[183].substring(pointst+20, pointsl));
+     println(vejrgrader);
 
-    pointst = lines[179].indexOf("alt");
-    pointsl = lines[179].indexOf("/></td>", pointst); 
+    pointst = lines[182].indexOf("alt");
+    pointsl = lines[182].indexOf("/></td>", pointst); 
 
-    // vejrstatus = (lines[179].substring(pointst+4, pointsl-1));
-    //  println(vejrstatus);
+     vejrstatus = (lines[182].substring(pointst+5, pointsl-2));
+      println(vejrstatus);
   }
 }

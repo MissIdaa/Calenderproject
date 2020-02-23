@@ -27,7 +27,7 @@ class Boks {
   }
 
   void update() {
-    if (dato != 0 && withinRect()) {
+    if (dato != 0 && withinRect() && mousePressed) {
       text(dato, mouseX, mouseY);
     }
   }
