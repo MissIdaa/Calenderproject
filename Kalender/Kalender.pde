@@ -32,19 +32,39 @@ int CurrentUser;
 boolean run = true;
 boolean bgrun = false;
 int bgdato;
+int bgrunmode;
+boolean click = true;
 PrintWriter output;
+BufferedReader reader;
+
+
 
 void setup() {
-  fullScreen();
-  String[] lines = loadStrings("C:/Users/aleks/Desktop/HTX 3.G/Tekningfag - Digital design/GitHub/Flappy_bird2/Calenderproject/Kalender/Begivenheder.txt");
-  output = createWriter("Begivenheder.txt");
-  if ( lines != null) {
-    for (int i = 0; i < lines.length; i++) {
-      output.println(lines[i]);
+ /* for (int j = 0; j < 2; j++) {
+    for (int i = 1; i < 36; i++) {
+      output = createWriter("Begivenheder" + i + j + ".txt");
     }
-  }
+  } */
 
-  BufferedReader reader = createReader("Begivenheder.txt");
+
+
+  fullScreen();
+  // String[] lines;
+  // lines = loadStrings("C:/Users/aleks/Desktop/HTX 3.G/Tekningfag - Digital design/GitHub/Flappy_bird2/Calenderproject/Kalender/Begivenheder.txt");
+  //  if ( lines != null) {
+  //    for (int i = 0; i < lines.length; i++) {
+  //      output.println(lines[i]);
+  //    }
+  //  }
+
+  //  reader = createReader("Begivenheder" + dato + ".txt");
+
+  /*
+Skaber Reader som læser dokumentets oplysninger ind i array;
+   Når jeg trykker gem skaber jeg min createWriter og outputter det gamle array + nye informationer;
+   
+   */
+
 
   // Tilføjelse af brugere, mulighed for tilføjelse af flere skal implementeres
   brugere.add(new Bruger("Caroline"));

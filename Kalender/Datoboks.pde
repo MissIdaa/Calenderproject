@@ -30,10 +30,16 @@ class Boks {
   }
 
   void update() {
-    if (dato != 0 && withinRect() && mousePressed && bgrun == false) {
-      text(marked_date, mouseX, mouseY);
+    if (dato != 0 && withinRect() && mousePressed && bgrun == false && click == true) {
+      //    text(marked_date, mouseX, mouseY);
       bgrun = true;
       bgdato = marked_date;
+      if (mouseButton == LEFT) {
+        bgrunmode = 2;
+        bg.dato = dato;
+      } else if (mouseButton == RIGHT) {
+        bgrunmode = 1;
+      }
     }
   }
 
