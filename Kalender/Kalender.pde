@@ -3,8 +3,6 @@
 
 // Hans Christian hjælpesager:
 
-//Vi laver hver begivenhed som et objekt
-// Hvert objekt har deres ejer og dato som variabler
 
 // Gemme objekternes begivenheder til en bruger
 // Objekterne/begivenhederne gemmes i hver deres fil, med deres dato og deres ejer(bruger)

@@ -23,6 +23,7 @@ class Begivenhed {
       rect(gem_xpos, gem_ypos, gem_w, gem_h);
       rect(gem_xpos-100, gem_ypos, gem_w, gem_h);
 
+// Her skal knapperne designes
       rect((width/2)-200, (height/2)-200, 100, 50);
       //     rect();
       //     rect();
@@ -35,6 +36,11 @@ class Begivenhed {
       //    text();
       rectMode(CORNER);
 
+// Her skal der skrives kode der gør man kan skrive en custom titel
+
+
+
+// Her skal koden for knapperne hvor man kan vælge ikon/type begivenhed skrives
       //      if (withinRect(mouseX, mouseY, xpos, ypos,50,50) && mousePressed){
 
 
@@ -70,16 +76,17 @@ class Begivenhed {
 
 
 
-        // Indsæt eget brug
+        // Her skal der skrives kode for visning af kalenderdatoens oplysninger
+        
+        // Vis kun hvis bruger er lig med currentUser
+        // Vis ikon på kalenderforsiden <-- Skal nok skrives under KalenderLayout istedet.
+        // Vis ikon og dens navn + customtitel under detaljeret oversigt
       }
-      //     text(dato,500,500);
       if (type != null) {
         text(type, 800, 500);
       }
-      //println(bgdato);
-      //println(pieces.length);
+      type = null;
     }
-    type = null;
   }
 
 
