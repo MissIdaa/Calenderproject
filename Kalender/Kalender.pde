@@ -34,6 +34,7 @@ boolean bgrun = false;
 int bgdato;
 int bgrunmode;
 boolean click = true;
+boolean oprettet = false;
 PrintWriter output;
 BufferedReader reader;
 
@@ -109,7 +110,7 @@ void draw() {
     bg.display();
     bg.update();
   }
-  //text(bgdato,100,100);
+
   /*
   // Regn animation
    regn.add(new droplet( new PVector (random(0, width), -100), new PVector(random(0, -100), random(20, 40))));

@@ -13,10 +13,10 @@ class Layout {
   float y;
 
   // afslut knap
-  float afslut_xpos = width-125;
-  float afslut_ypos = height-75;
-  float afslut_w = 100;
-  float afslut_h = 50;
+  float afslut_xpos = width-50;
+  float afslut_ypos = 50;
+  float afslut_w = 75;
+  float afslut_h = 75;
 
 
   Layout() {
@@ -53,27 +53,33 @@ class Layout {
         } else {
           ugedag = null;
         }
-        bokse.add(new Boks(100+(i*(1720/7)), 200+(j*(780/6)), farve, ugedag, dato,sumdato));
+        bokse.add(new Boks(100+(i*(1720/7)), 200+(j*(780/6)), farve, ugedag, dato, sumdato));
       }
     }
   }
 
   void display() {
-    // Aflsut knap
-    fill(255);
-    rect(afslut_xpos, afslut_ypos, afslut_w, afslut_h);
-    fill(0);
-    textSize(23);
-    text("AFSLUT", afslut_xpos+5, afslut_ypos+30);
-
     // Animerede skyer
-    x1 += dx;
-    x2 += dx;
-    x3 += dx;
     image(cloud, x1, y);
     image(cloud, x2, y);
     image(cloud, x3, y);
-
+    
+    // Aflsut knap
+    noFill();
+    strokeWeight(4);
+    stroke(0,150);
+    rect(afslut_xpos-afslut_w/2, afslut_ypos-afslut_h/2, afslut_w, afslut_h);
+    //  ellipse(afslut_xpos, afslut_ypos, afslut_w, afslut_h);
+    line(afslut_xpos-afslut_w/4, afslut_ypos-afslut_w/4, afslut_xpos+afslut_w/4, afslut_ypos+afslut_w/4);
+    line(afslut_xpos+afslut_w/4, afslut_ypos-afslut_w/4, afslut_xpos-afslut_w/4, afslut_ypos+afslut_w/4);
+    fill(0);
+    stroke(0);
+    strokeWeight(1);
+  }
+  void update() {
+    x1 += dx;
+    x2 += dx;
+    x3 += dx;
     if (x1 <= -1200) { // flytter skyen 
       x1 = x3 + 1200;
     } 
@@ -83,17 +89,17 @@ class Layout {
     if (x3 <= -1200) { // Flytter skyen, alle 3 statements flytter skyne over på den modsatte side af canvas 
       x3 = x2 + 1200;
     }
-  }
-  void update() {
 
     if (withinRect() && mousePressed) {
-      output.flush();
-      output.close();
+      if (oprettet) {
+        output.flush();
+        output.close();
+      }
       exit();
     }
   }
   boolean withinRect() {
-    if (dist(mouseX, 0, afslut_xpos+(afslut_w/2), 0)<= afslut_w/2 && dist(0, mouseY, 0, (afslut_ypos+afslut_h/2))<=afslut_h/2) {
+    if (dist(mouseX, 0, afslut_xpos, 0)<= afslut_w/2 && dist(0, mouseY, 0, afslut_ypos) <=afslut_h/2) {
       return true;
     } else {
       return false;

@@ -21,10 +21,24 @@ class Begivenhed {
       fill(255);
       rect(width/2, height/2, 750, 750);
       rect(gem_xpos, gem_ypos, gem_w, gem_h);
+      rect(gem_xpos-100, gem_ypos, gem_w, gem_h);
+
+      rect((width/2)-200, (height/2)-200, 100, 50);
+      //     rect();
+      //     rect();
       fill(0);
       textSize(25);
-      text("GEM", gem_xpos-28, gem_ypos+7);
+      text("LUK", gem_xpos-28, gem_ypos+7);
+      text("GEM", gem_xpos-128, gem_ypos+7);
+      //     text();
+      //    text();
+      //    text();
       rectMode(CORNER);
+
+      //      if (withinRect(mouseX, mouseY, xpos, ypos,50,50) && mousePressed){
+
+
+      //     }
     }
 
     // aflæse informationer om dagen
@@ -65,23 +79,28 @@ class Begivenhed {
       //println(bgdato);
       //println(pieces.length);
     }
+    type = null;
   }
 
 
   void update() {
 
-    if (withinRect() && mousePressed && bgrunmode == 1) {
+    if (withinRect1() && mousePressed && bgrunmode == 1) {
       bgrun = false;
       output = createWriter("Begivenheder"+ bgdato + CurrentUser + ".txt");
       //    output.println(bgdato);
       output.println(type + "/t" + besked);
+      click = false;
+      oprettet = false;
+    } else if (withinRect3() && mousePressed && bgrunmode == 1) {
+      bgrun = false;
       click = false;
     } else if (withinRect2() && mousePressed && bgrunmode == 2) {
       bgrun = false;
       click = false;
     }
   }
-  boolean withinRect() {
+  boolean withinRect1() {
     if (dist(mouseX, 0, gem_xpos, 0)<= gem_w/2 && dist(0, mouseY, 0, gem_ypos)<=gem_h/2) {
       return true;
     } else {
@@ -95,9 +114,22 @@ class Begivenhed {
       return false;
     }
   }
+  boolean withinRect3() {
+    if (dist(mouseX, 0, gem_xpos-100, 0)<= gem_w/2 && dist(0, mouseY, 0, gem_ypos)<=gem_h/2) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  boolean withinRect(float x, float y, float xpos, float ypos, float w, float h) {
+    if (dist(x, 0, xpos, 0)<= w/2 && dist(0, y, 0, ypos)<=h/2) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 
 void mouseReleased() {
-
   click = true;
 }
