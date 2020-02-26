@@ -10,22 +10,8 @@ class Begivenhed {
   String typevalg;
   String type = null;
 
-  PImage birthday, work, travel, party, sport, homework;
-
 
   Begivenhed() {
-    birthday = loadImage("birthday.PNG");
-    birthday.resize(50, 50);
-    work = loadImage("work.PNG");
-    work.resize(50, 50);
-    travel = loadImage("travel.PNG");
-    travel.resize(50, 50);
-    party = loadImage("party.PNG");
-    party.resize(50, 50);
-    sport = loadImage("sport.PNG");
-    sport.resize(50, 50);
-    homework = loadImage("homework.PNG");
-    homework.resize(50, 50);
   }
 
   void display() {
@@ -33,7 +19,7 @@ class Begivenhed {
     if (bgrunmode == 1) {
       rectMode(CENTER);
       fill(255);
-      rect(width/2, height/2, 750, 250);
+      rect(width/2, height/2, 750, 250, 20);
       rect(gem_xpos, gem_ypos-250, gem_w, gem_h);
       rect(gem_xpos-100, gem_ypos-250, gem_w, gem_h);
 
@@ -71,22 +57,22 @@ class Begivenhed {
       // Her skal koden for knapperne hvor man kan vælge ikon/type begivenhed skrives
       if (withinRect(mouseX, mouseY, 1000, gem_ypos-250, 50, 50) && mousePressed) {
         typevalg = "abcdef";
-        text("6", 100, 100);
+        oprettet = true;
       } else if (withinRect(mouseX, mouseY, 930, gem_ypos-250, 50, 50) && mousePressed) {
         typevalg = "abcde";
-        text("5", 100, 100);
+        oprettet = true;
       } else if (withinRect(mouseX, mouseY, 860, gem_ypos-250, 50, 50) && mousePressed) {
         typevalg = "abcd";
-        text("4", 100, 100);
+        oprettet = true;
       } else if (withinRect(mouseX, mouseY, 790, gem_ypos-250, 50, 50) && mousePressed) {
         typevalg = "abc";
-        text("3", 100, 100);
+        oprettet = true;
       } else if (withinRect(mouseX, mouseY, 720, gem_ypos-250, 50, 50) && mousePressed) {
         typevalg = "ab";
-        text("2", 100, 100);
+        oprettet = true;
       } else if (withinRect(mouseX, mouseY, 650, gem_ypos-250, 50, 50) && mousePressed) {
         typevalg = "a";
-        text("1", 100, 100);
+        oprettet = true;
       }
     }
 
@@ -94,7 +80,7 @@ class Begivenhed {
     else if (bgrunmode == 2) {
       rectMode(CENTER);
       fill(255);
-      rect(width/2, height/2, 400, 200);
+      rect(width/2, height/2, 400, 200, 20);
       rect(gem_xpos-175, gem_ypos-275, gem_w, gem_h);
       fill(0);
       textSize(25);
@@ -173,11 +159,18 @@ class Begivenhed {
 
     if (withinRect1() && mousePressed && bgrunmode == 1) {
       bgrun = false;
-      output = createWriter("Begivenheder"+ bgdato + CurrentUser + ".txt");
-      output.println(typevalg + "/t" + besked);
+      if (oprettet) {
+        output = createWriter("Begivenheder"+ bgdato + CurrentUser + ".txt");
+        output.println(typevalg + "/t" + besked);
+        output.flush();
+        output.close();
+      } else {
+        output = createWriter("Begivenheder"+ bgdato + CurrentUser + ".txt");
+        output.flush();
+        output.close();
+      }
+      oprettet = false;
       click = false;
-      output.flush();
-      output.close();
     } else if (withinRect3() && mousePressed && bgrunmode == 1) {
       bgrun = false;
       click = false;

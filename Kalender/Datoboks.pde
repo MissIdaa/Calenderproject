@@ -7,6 +7,12 @@ class Boks {
   int dato;
   int marked_date;
 
+  String pieces[];
+  String type;
+  String line;
+
+  BufferedReader reader2;
+
 
   Boks(float tempXpos, float tempYpos, color tempFarve, String tempUgedag, int tempDato, int tempMarked_date) {
     xpos = tempXpos;
@@ -15,6 +21,10 @@ class Boks {
     ugedag = tempUgedag;
     dato = tempDato;
     marked_date = tempMarked_date;
+
+    if (marked_date != 0) {
+      reader2 = createReader("Begivenheder" + marked_date + CurrentUser + ".txt");
+    }
   }
 
   void display() {
@@ -26,6 +36,37 @@ class Boks {
     }
     if (dato != 0) {
       text(dato, xpos+10, ypos+50);
+    }
+
+    if (marked_date != 0) {
+      try {
+        line = reader2.readLine();
+      } 
+      catch (IOException e) {
+        e.printStackTrace();
+        line = null;
+      }
+      if (line == null) {
+        //   println("test");
+      } else {
+        pieces = split(line, "/t");
+        type = pieces[0];
+      }
+      if (type != null) {
+        if (type.length() == 1) {
+          image(birthday, xpos+185, ypos+8);
+        } else if (type.length() == 2) {
+          image(homework, xpos+185, ypos+8);
+        } else if (type.length() == 3) {
+          image(party, xpos+185, ypos+8);
+        } else if (type.length() == 4) {
+          image(sport, xpos+185, ypos+8);
+        } else if (type.length() == 5) {
+          image(travel, xpos+185, ypos+8);
+        } else if (type.length() == 6) {
+          image(work, xpos+185, ypos+8);
+        }
+      }
     }
   }
 

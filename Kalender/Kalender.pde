@@ -21,41 +21,31 @@ color tema = color(75, 75, 255);
 int CurrentUser = 0;
 boolean run = true;
 boolean bgrun = false;
-int bgdato;
+int bgdato = 1;
 int bgrunmode;
 boolean click = true;
 boolean oprettet = false;
 PrintWriter output;
 BufferedReader reader;
-
+PImage birthday, work, travel, party, sport, homework;
 
 
 void setup() {
- /* for (int j = 0; j < 2; j++) {
-    for (int i = 1; i < 36; i++) {
-      output = createWriter("Begivenheder" + i + j + ".txt");
-    }
-  } */
-
-
+  // opsætning af billeder
+  birthday = loadImage("birthday.PNG");
+  birthday.resize(50, 50);
+  work = loadImage("work.PNG");
+  work.resize(50, 50);
+  travel = loadImage("travel.PNG");
+  travel.resize(50, 50);
+  party = loadImage("party.PNG");
+  party.resize(50, 50);
+  sport = loadImage("sport.PNG");
+  sport.resize(50, 50);
+  homework = loadImage("homework.PNG");
+  homework.resize(50, 50);
 
   fullScreen();
-  // String[] lines;
-  // lines = loadStrings("C:/Users/aleks/Desktop/HTX 3.G/Tekningfag - Digital design/GitHub/Flappy_bird2/Calenderproject/Kalender/Begivenheder.txt");
-  //  if ( lines != null) {
-  //    for (int i = 0; i < lines.length; i++) {
-  //      output.println(lines[i]);
-  //    }
-  //  }
-
-  //  reader = createReader("Begivenheder" + dato + ".txt");
-
-  /*
-Skaber Reader som læser dokumentets oplysninger ind i array;
-   Når jeg trykker gem skaber jeg min createWriter og outputter det gamle array + nye informationer;
-   
-   */
-
 
   // Tilføjelse af brugere, mulighed for tilføjelse af flere skal implementeres
   brugere.add(new Bruger("Caroline"));
@@ -82,11 +72,14 @@ Skaber Reader som læser dokumentets oplysninger ind i array;
 void draw() {
   background(Baggrund[CurrentUser]);
   // chiplogin();
-  // brugere.get(CurrentUser).display();
+ 
 
   //Display af kalenderens generelle layout
   l.display();
   l.update();
+
+// Display af bruger
+ brugere.get(CurrentUser).display();
 
   // Display af vejret
   vejr.display();

@@ -7,7 +7,7 @@ class droplet {
     pos = tempPos.copy();
     v = tempV.copy();
     drop = loadImage("drop.png");
-    drop.resize(10,20);
+    drop.resize(10, 20);
   }
 
   void display() {
