@@ -72,14 +72,14 @@ void setup() {
 void draw() {
   background(Baggrund[CurrentUser]);
   // chiplogin();
- 
+
 
   //Display af kalenderens generelle layout
   l.display();
   l.update();
 
-// Display af bruger
- brugere.get(CurrentUser).display();
+  // Display af bruger
+  brugere.get(CurrentUser).display();
 
   // Display af vejret
   vejr.display();
