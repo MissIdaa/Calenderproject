@@ -1,14 +1,6 @@
 // Interaktiv Kalender
 // Gruppeprojekt Aleksander, Caroline, Ida, Mads og Lucas
 
-// Hans Christian hjælpesager:
-
-
-// Gemme objekternes begivenheder til en bruger
-// Objekterne/begivenhederne gemmes i hver deres fil, med deres dato og deres ejer(bruger)
-// Brug PrintWriter, createWriter, createrReader og libary til at vælge den rigtige fil.
-// Lave en smart måde at tilegne begivenhederne navne.
-
 // Bibliotek af objekter og metoder vi skal bruge
 import processing.serial.*;
 import java.util.Calendar;
@@ -26,7 +18,7 @@ Begivenhed bg;
 // Andre
 PImage[] Baggrund = new PImage[2]; 
 color tema = color(75, 75, 255);
-int CurrentUser;
+int CurrentUser = 0;
 boolean run = true;
 boolean bgrun = false;
 int bgdato;

@@ -63,11 +63,11 @@ class Layout {
     image(cloud, x1, y);
     image(cloud, x2, y);
     image(cloud, x3, y);
-    
+
     // Aflsut knap
     noFill();
     strokeWeight(4);
-    stroke(0,150);
+    stroke(0, 150);
     rect(afslut_xpos-afslut_w/2, afslut_ypos-afslut_h/2, afslut_w, afslut_h);
     //  ellipse(afslut_xpos, afslut_ypos, afslut_w, afslut_h);
     line(afslut_xpos-afslut_w/4, afslut_ypos-afslut_w/4, afslut_xpos+afslut_w/4, afslut_ypos+afslut_w/4);
@@ -91,10 +91,6 @@ class Layout {
     }
 
     if (withinRect() && mousePressed) {
-      if (oprettet) {
-        output.flush();
-        output.close();
-      }
       exit();
     }
   }
