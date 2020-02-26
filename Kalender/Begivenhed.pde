@@ -1,8 +1,11 @@
 class Begivenhed {
+  // variabler til posistion
   float gem_xpos = width/2+310;
   float gem_ypos = height/2+325;
   float gem_w = 80;
   float gem_h = 50;
+
+  // Variabler til boksfunktionalitet
   String besked = "";
   String line;
   String[] pieces;
@@ -18,15 +21,14 @@ class Begivenhed {
   }
 
   void display() {
-    // tilføje informationer om dagen
+    // Kode til at tilføje informationer om dagen (højreklik)
     if (bgrunmode == 1) {
+      // Det yderste design for boksen til højreklik
       rectMode(CENTER);
       fill(255);
       rect(width/2, height/2, 750, 250, 20);
       rect(gem_xpos, gem_ypos-250, gem_w, gem_h);
       rect(gem_xpos-100, gem_ypos-250, gem_w, gem_h);
-
-
       fill(0);
       textSize(40);
       text("Ny begivenhed - skriv titel og vælg type", 600, 475);
@@ -34,7 +36,7 @@ class Begivenhed {
       text("LUK", gem_xpos-28, gem_ypos-243);
       text("GEM", gem_xpos-128, gem_ypos-243);
 
-      // Custom titel
+      // Tjek om jeg har klikket på teksfelt
       if (withinRect(mouseX, mouseY, 900, gem_ypos-340, 500, 50) && mousePressed) {
         typing = true;
       } 
@@ -48,8 +50,7 @@ class Begivenhed {
       fill(0);
       text(besked, 640, gem_ypos-330);
 
-
-      // Koden for knapperne hvor man kan vælge ikon/type begivenhed 
+      // Koden for de 6 knapper hvor man kan vælge ikon til ens begivenhed
       if (withinRect(mouseX, mouseY, 1000, gem_ypos-250, 50, 50) && mousePressed) {
         typevalg = "abcdef";
         oprettet = true;
@@ -75,8 +76,8 @@ class Begivenhed {
         oprettet = true;
         selected = 1;
       } 
-      // Her skal knapperne designes
 
+      // Koden for boksene der viser man har selected et ikon
       if (selected == 6) {
         strokeWeight(4);
       }
@@ -117,8 +118,10 @@ class Begivenhed {
       rectMode(CORNER);
     }
 
-    // aflæse informationer om dagen
+    // Kode til at aflæse informationerne om dagen (Venstreklik)
     else if (bgrunmode == 2) {
+
+      // Generelt design
       rectMode(CENTER);
       fill(255);
       rect(width/2, height/2, 400, 200, 20);
@@ -128,8 +131,10 @@ class Begivenhed {
       text("LUK", gem_xpos-200, gem_ypos-268);
       rectMode(CORNER);
 
+      // Aflæser til dokumentet begivenhederne er gemt på
       reader = createReader("Begivenheder" + bgdato + CurrentUser + ".txt");
 
+      // Læs dokumentet tilhørende datoen
       try {
         line = reader.readLine();
       } 
@@ -146,11 +151,10 @@ class Begivenhed {
         if (pieces.length == 2) {
           message = pieces[1];
         }
-        // Her skal der skrives kode for visning af kalenderdatoens oplysninger
-
-        // Vis kun hvis bruger er lig med currentUser
-        // Vis ikon og dens navn + customtitel under detaljeret oversigt
       }
+      
+      // Hvis der er gemt noget på dokumentet om dagen, så displayer den her hvad der er gemt
+      // Ikon
       if (type != null) {
         textSize(35);
         if (type.length() == 1) {
@@ -178,6 +182,7 @@ class Begivenhed {
         }
       }
       type = null;
+      // Besked
       if (message != null) {
         textSize(25);
         text(message, 790, 535);
@@ -186,14 +191,12 @@ class Begivenhed {
     }
   }
 
-
+  // Klikker man ud af tekstfelt?
   void update() {
     if (!withinRect(mouseX, mouseY, 900, gem_ypos-340, 500, 50) && mousePressed) {
       typing = false;
     } 
-
-
-
+    // Klikkes på gem knap
     if (withinRect1() && mousePressed && bgrunmode == 1) {
       bgrun = false;
       if (oprettet) {
@@ -210,16 +213,22 @@ class Begivenhed {
       click = false;
       besked = "";
       selected = 0;
-    } else if (withinRect3() && mousePressed && bgrunmode == 1) {
+    } 
+    // Klikkes på luk ved venstreklik
+    else if (withinRect3() && mousePressed && bgrunmode == 1) {
       bgrun = false;
       click = false;
       besked = "";
       selected = 0;
-    } else if (withinRect2() && mousePressed && bgrunmode == 2) {
+    } 
+    // klikkes på luk ved højreklik
+    else if (withinRect2() && mousePressed && bgrunmode == 2) {
       bgrun = false;
       click = false;
     }
   }
+
+  // Laves om hvis jeg får overskud
   boolean withinRect3() {
     if (dist(mouseX, 0, gem_xpos, 0)<= gem_w/2 && dist(0, mouseY, 0, gem_ypos-250)<=gem_h/2) {
       return true;
@@ -227,6 +236,7 @@ class Begivenhed {
       return false;
     }
   }
+  // Laves om hvis jeg får overskud
   boolean withinRect2() {
     if (dist(mouseX, 0, gem_xpos-175, 0)<= gem_w/2 && dist(0, mouseY, 0, gem_ypos-275)<=gem_h/2) {
       return true;
@@ -234,6 +244,7 @@ class Begivenhed {
       return false;
     }
   }
+  // Laves om hvis jeg får overskud
   boolean withinRect1() {
     if (dist(mouseX, 0, gem_xpos-100, 0)<= gem_w/2 && dist(0, mouseY, 0, gem_ypos-250)<=gem_h/2) {
       return true;
@@ -241,6 +252,7 @@ class Begivenhed {
       return false;
     }
   }
+  // Generel funktion for at tjekke om man har trykket på en firkant
   boolean withinRect(float x, float y, float xpos, float ypos, float w, float h) {
     if (dist(x, 0, xpos, 0)<= w/2 && dist(0, y, 0, ypos)<=h/2) {
       return true;
@@ -249,6 +261,8 @@ class Begivenhed {
     }
   }
 }
+
+// Kode for at kunne skrive en custom titel
 void keyPressed() {
   if (bg.typing) {
     if (key==BACKSPACE) {

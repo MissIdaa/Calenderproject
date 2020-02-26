@@ -9,6 +9,7 @@ class Bruger {
   }
 
   void display() {
+    // Simpel display af bruger navnet, har en anderledes font
     textFont(myFont);
     textSize(70);
     fill(0);

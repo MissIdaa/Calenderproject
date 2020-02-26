@@ -1,9 +1,17 @@
 // Interaktiv Kalender
 // Gruppeprojekt Aleksander, Caroline, Ida, Mads og Lucas
 
-// Bibliotek af objekter og metoder vi skal bruge
+// I kalenderen kan man tilføje en begivenhed til en dag ved at højreklikke på datoen og skrive en besked og vælge et ikon/type
+// Man kan se mere info om datoen ved at venstreklikke på det
+// Afslutknap i øverste højre hjørne
+// Man kan skifte bruger med arduino chip, Det kræver bare man skal fjerne kommentarene i koden og tilkoble RFID Scanneren
+// Vejrudsigten er opdateret med de nuværende vejrmeldinger, hvis den giver error er det fordi de har ændret koden på hjemmesiden (det er for det meste ikke flyttet mere end 3 linjer)
+// Det er en prototype, så der er kun en enkelt (fiktionel) måned lige nu
+// Have fun! 
+
+
+// Bibliotek vi skal bruge til interaktion med arduino
 import processing.serial.*;
-import java.util.Calendar;
 
 // Arraylister og objkter til klasser
 ArrayList<droplet> regn = new ArrayList<droplet>();
@@ -11,7 +19,6 @@ ArrayList<Bruger> brugere = new ArrayList<Bruger>();
 ArrayList<Boks> bokse = new ArrayList<Boks>();
 Serial myPort;
 Layout l;
-Calendar calendar;
 Vejrudsigt vejr;
 Begivenhed bg;
 
@@ -31,7 +38,7 @@ PImage birthday, work, travel, party, sport, homework;
 
 
 void setup() {
-  // opsætning af billeder
+  // opsætning af billeder der bruges til ikoner (Omskrives til arrayliste og resizing hvis jeg har ekstra tid)
   birthday = loadImage("birthday.PNG");
   birthday.resize(50, 50);
   work = loadImage("work.PNG");
@@ -45,34 +52,32 @@ void setup() {
   homework = loadImage("homework.PNG");
   homework.resize(50, 50);
 
+  // Baggrundsbilleder
+  Baggrund[0] = loadImage("sol.png");
+  Baggrund[1] = loadImage("skyet.png");
   fullScreen();
 
-  // Tilføjelse af brugere, mulighed for tilføjelse af flere skal implementeres
+  // Tilføjelse af brugere, omskrives senere hvis der skal implementeres system for oprettelse
   brugere.add(new Bruger("Caroline"));
   brugere.add(new Bruger("Ida"));
 
-  // Oprettelse af objekter
+  // Oprettelse af objekterne
   l = new Layout();
   vejr = new Vejrudsigt();
   bg = new Begivenhed();
 
-  /*
-// Opsætning af serial port
+  /*    Udstreget så længe man ikke kan tilkoble en arduino
+   // Opsætning af serial port
    String portName = Serial.list() [2];
    println("Proever: " + portName);
    myPort = new Serial(this, portName, 115200);
    */
-
-  // Indlæsning af de forskellige baggrundsmuligheder
-  Baggrund[0] = loadImage("sol.png");
-  Baggrund[1] = loadImage("skyet.png");
 }
 
 // Her køres funktionerne
 void draw() {
   background(Baggrund[CurrentUser]);
-  // chiplogin();
-
+  // chiplogin();   // Igen køres kun hvis vi har arduino tilkoblet
 
   //Display af kalenderens generelle layout
   l.display();
@@ -89,13 +94,15 @@ void draw() {
     b.display();
     b.update();
   }
+
+  // Display af boks om begivenheder (både venstre og højreklik
   if (bgrun == true) {
     bg.display();
     bg.update();
   }
 
-  /*
-  // Regn animation
+  /*  // Ekstra ting vi legede med
+   // Regn animation
    regn.add(new droplet( new PVector (random(0, width), -100), new PVector(random(0, -100), random(20, 40))));
    for (droplet d : regn) {
    d.display();
@@ -105,8 +112,8 @@ void draw() {
 }
 
 //-------------------------------------------------------------------------
-/*
-// Arduino chips
+/*  // Slås til hvis vi har arduiono
+ // Arduino chips
  void chiplogin() {
  if (myPort.available() > 0) {
  dataWemos = myPort.readStringUntil ('\n');

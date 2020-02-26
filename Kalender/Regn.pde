@@ -1,7 +1,9 @@
+// For sjov animation vi lavede, kan aktiveres under draw løkken
+
 class droplet {
   PImage drop;
   PVector pos;
-  PVector v;
+  PVector v; 
 
   droplet(PVector tempPos, PVector tempV) {
     pos = tempPos.copy();
