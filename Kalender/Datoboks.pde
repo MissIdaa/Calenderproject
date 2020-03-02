@@ -3,6 +3,7 @@ class Boks {
   float w = 1720/7;
   float h = 780/6;
   color farve;
+  boolean hover = false;
 
   // Dato tildeling
   String ugedag;
@@ -25,14 +26,21 @@ class Boks {
     ugedag = tempUgedag;
     dato = tempDato;
     marked_date = tempMarked_date;
-
   }
 
   void display() {
     // Selve boksen bliver skabt
+    if (hover) {
+      stroke(255, 0, 0);
+      strokeWeight(3);
+      hover = false;
+    } 
     fill(farve);
     rect(xpos, ypos, w, h, 10);
+    stroke(0);
+    strokeWeight(1);
     fill(0);
+
 
     // Ugedagene bliver skabt (Mandag, tirsdag, onsdag,...)
     if (ugedag != null) {
@@ -85,6 +93,12 @@ class Boks {
   }
 
   void update() {
+
+    if (withinRect()) {
+      hover = true;
+    }
+
+
     // Hvis der trykkes på en dato/boks
     if (dato != 0 && withinRect() && mousePressed && bgrun == false && click == true) {
       bgrun = true;
