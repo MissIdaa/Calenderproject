@@ -3,6 +3,7 @@ class Boks {
   float w = 1720/7;
   float h = 780/6;
   color farve;
+  boolean hover = false;
 
   // Dato tildeling
   String ugedag;
@@ -25,18 +26,21 @@ class Boks {
     ugedag = tempUgedag;
     dato = tempDato;
     marked_date = tempMarked_date;
-
-    // Laver reader til dagene i kalenderen
-    if (marked_date != 0) {
-      reader2 = createReader("Begivenheder" + marked_date + CurrentUser + ".txt");
-    }
   }
 
   void display() {
     // Selve boksen bliver skabt
+    if (hover) {
+      stroke(255, 0, 0);
+      strokeWeight(3);
+      hover = false;
+    } 
     fill(farve);
     rect(xpos, ypos, w, h, 10);
+    stroke(0);
+    strokeWeight(1);
     fill(0);
+
 
     // Ugedagene bliver skabt (Mandag, tirsdag, onsdag,...)
     if (ugedag != null) {
@@ -45,6 +49,11 @@ class Boks {
     // Tallet til datoen bliver skabt
     if (dato != 0) {
       text(dato, xpos+10, ypos+50);
+    }
+
+    // Laver reader til dagene i kalenderen
+    if (marked_date != 0) {
+      reader2 = createReader("Begivenheder" + marked_date + CurrentUser + ".txt");
     }
 
     // Her læser den dokumentet og ser om der et ikon tilgængeligt
@@ -79,10 +88,17 @@ class Boks {
           image(work, xpos+185, ypos+8);
         }
       }
+      type = null;
     }
   }
 
   void update() {
+
+    if (withinRect()) {
+      hover = true;
+    }
+
+
     // Hvis der trykkes på en dato/boks
     if (dato != 0 && withinRect() && mousePressed && bgrun == false && click == true) {
       bgrun = true;

@@ -25,7 +25,7 @@ Begivenhed bg;
 // Andre
 PImage[] Baggrund = new PImage[2]; 
 color tema = color(75, 75, 255);
-int CurrentUser = 0;
+int CurrentUser;
 boolean run = true;
 boolean bgrun = false;
 int bgdato = 1;
@@ -35,6 +35,8 @@ boolean oprettet = false;
 PrintWriter output;
 BufferedReader reader;
 PImage birthday, work, travel, party, sport, homework;
+String dataWemos = "";
+String kortNum = "0";
 
 
 void setup() {
@@ -66,18 +68,17 @@ void setup() {
   vejr = new Vejrudsigt();
   bg = new Begivenhed();
 
-  /*    Udstreget så længe man ikke kan tilkoble en arduino
-   // Opsætning af serial port
-   String portName = Serial.list() [2];
-   println("Proever: " + portName);
-   myPort = new Serial(this, portName, 115200);
-   */
+  //  Udstreget så længe man ikke kan tilkoble en arduino
+  // Opsætning af serial port
+  String portName = Serial.list() [2];
+  println("Proever: " + portName);
+  myPort = new Serial(this, portName, 115200);
 }
 
 // Her køres funktionerne
 void draw() {
   background(Baggrund[CurrentUser]);
-  // chiplogin();   // Igen køres kun hvis vi har arduino tilkoblet
+  chiplogin();   // Igen køres kun hvis vi har arduino tilkoblet
 
   //Display af kalenderens generelle layout
   l.display();
@@ -100,8 +101,8 @@ void draw() {
     bg.display();
     bg.update();
   }
-
-  /*  // Ekstra ting vi legede med
+  /*
+    // Ekstra ting vi legede med
    // Regn animation
    regn.add(new droplet( new PVector (random(0, width), -100), new PVector(random(0, -100), random(20, 40))));
    for (droplet d : regn) {
@@ -112,20 +113,17 @@ void draw() {
 }
 
 //-------------------------------------------------------------------------
-/*  // Slås til hvis vi har arduiono
- // Arduino chips
- void chiplogin() {
- if (myPort.available() > 0) {
- dataWemos = myPort.readStringUntil ('\n');
- //   println("Received: " + dataWemos);
- if (dataWemos != null) {
- if (dataWemos.charAt(10) == '#') {
- kortNum = dataWemos.substring(11, dataWemos.length()-3);
- }
- }
- }
- CurrentUser = int(kortNum);
- // println(kortNum);
- text(CurrentUser, 500, 100);
- }
- */
+// Slås til hvis vi har arduiono
+// Arduino chips
+void chiplogin() {
+  if (myPort.available() > 0) {
+    dataWemos = myPort.readStringUntil ('\n');
+    println("Received: " + dataWemos);
+    if (dataWemos != null) {
+      if (dataWemos.charAt(10) == '#') {
+        kortNum = dataWemos.substring(11, dataWemos.length()-3);
+      }
+    }
+  }
+  CurrentUser = int(kortNum);
+}
