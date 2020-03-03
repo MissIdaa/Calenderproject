@@ -121,16 +121,6 @@ class Begivenhed {
     // Kode til at aflæse informationerne om dagen (Venstreklik)
     else if (bgrunmode == 2) {
 
-      // Generelt design
-      rectMode(CENTER);
-      fill(255);
-      rect(width/2, height/2, 400, 200, 20);
-      rect(gem_xpos-175, gem_ypos-275, gem_w, gem_h);
-      fill(0);
-      textSize(25);
-      text("LUK", gem_xpos-200, gem_ypos-268);
-      rectMode(CORNER);
-
       // Aflæser til dokumentet begivenhederne er gemt på
       reader = createReader("Begivenheder" + bgdato + CurrentUser + ".txt");
 
@@ -152,6 +142,25 @@ class Begivenhed {
           message = pieces[1];
         }
       }
+      rectMode(CENTER);
+      textSize(25);
+      if (type == null) {
+        fill(255);
+        rect(width/2, (height/2)+30, 500, 140, 20);
+        fill(0);
+        text("Der er endnu ikke oprettet en begivenhed", 730, 550);
+      } else {
+        // Generelt design
+        fill(255);
+        rect(width/2, height/2, 400, 200, 20);
+      }
+      fill(255);
+      rect(gem_xpos-310, gem_ypos-275, gem_w, gem_h);
+      fill(0);
+      text("LUK", gem_xpos-335, gem_ypos-268);
+      rectMode(CORNER);
+
+
 
       // Hvis der er gemt noget på dokumentet om dagen, så displayer den her hvad der er gemt
       // Ikon
@@ -241,7 +250,7 @@ class Begivenhed {
   }
   // Laves om hvis jeg får overskud
   boolean withinRect2() {
-    if (dist(mouseX, 0, gem_xpos-175, 0)<= gem_w/2 && dist(0, mouseY, 0, gem_ypos-275)<=gem_h/2) {
+    if (dist(mouseX, 0, gem_xpos-310, 0)<= gem_w/2 && dist(0, mouseY, 0, gem_ypos-275)<=gem_h/2) {
       return true;
     } else {
       return false;
