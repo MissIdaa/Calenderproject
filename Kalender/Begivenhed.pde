@@ -152,7 +152,7 @@ class Begivenhed {
           message = pieces[1];
         }
       }
-      
+
       // Hvis der er gemt noget på dokumentet om dagen, så displayer den her hvad der er gemt
       // Ikon
       if (type != null) {
@@ -213,6 +213,7 @@ class Begivenhed {
       click = false;
       besked = "";
       selected = 0;
+      bgrunmode = 0;
     } 
     // Klikkes på luk ved venstreklik
     else if (withinRect3() && mousePressed && bgrunmode == 1) {
@@ -220,11 +221,13 @@ class Begivenhed {
       click = false;
       besked = "";
       selected = 0;
+      bgrunmode = 0;
     } 
     // klikkes på luk ved højreklik
     else if (withinRect2() && mousePressed && bgrunmode == 2) {
       bgrun = false;
       click = false;
+      bgrunmode = 0;
     }
   }
 
@@ -282,4 +285,5 @@ void keyPressed() {
 
 void mouseReleased() {
   click = true;
+  clickcounter ++;
 }

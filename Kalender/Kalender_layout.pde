@@ -18,6 +18,7 @@ class Layout {
   float afslut_ypos = 50;
   float afslut_w = 75;
   float afslut_h = 75;
+  boolean exit_hover = false;
 
 
   Layout() {
@@ -68,7 +69,12 @@ class Layout {
     // Aflsut knap tegnes
     noFill();
     strokeWeight(4);
-    stroke(0, 150);
+    if (exit_hover) {
+      stroke(0);
+      exit_hover = false;
+    } else {
+      stroke(0, 150);
+    }
     rect(afslut_xpos-afslut_w/2, afslut_ypos-afslut_h/2, afslut_w, afslut_h);
     line(afslut_xpos-afslut_w/4, afslut_ypos-afslut_w/4, afslut_xpos+afslut_w/4, afslut_ypos+afslut_w/4);
     line(afslut_xpos+afslut_w/4, afslut_ypos-afslut_w/4, afslut_xpos-afslut_w/4, afslut_ypos+afslut_w/4);
@@ -89,6 +95,10 @@ class Layout {
     } 
     if (x3 <= -1200) { // Flytter skyen, alle 3 statements flytter skyne over på den modsatte side af canvas 
       x3 = x2 + 1200;
+    }
+
+    if (withinRect()) {
+      exit_hover = true;
     }
 
     // Trykkes der på afslut?

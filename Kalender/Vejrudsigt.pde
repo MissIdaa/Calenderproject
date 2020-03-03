@@ -2,15 +2,16 @@ class Vejrudsigt {
   String dataWemos = "Intet endnu"; 
   String vejrgrader;
   String vejrstatus;
-  int xpos = 1465+50+50;
-  
+  int xpos = 1465+50+50+25;
+
   PImage Skyet, Regnbyer, Nogen_sol, Sol;
-  
+
   Vejrudsigt() {
-Skyet = loadImage("Skyet.png");
-Regnbyer = loadImage("Regnbyer.png");
-Nogen_sol = loadImage("Nogen_sol.png");
-Sol = loadImage("Sol.png");
+   
+    Skyet = loadImage("Skyet1.png");
+    Regnbyer = loadImage("Regnbyer.png");
+    Nogen_sol = loadImage("Nogen_sol.png");
+    Sol = loadImage("Sol1.png");
 
     vejrdata();
   }
@@ -18,21 +19,24 @@ Sol = loadImage("Sol.png");
   void display() {
     // Boksen og dens indhold vises
     fill(255);
-    rect(xpos, 50, 250, 100, 10);
+    strokeWeight(2);
+    rect(xpos, 65, 200, 85, 10);
+    strokeWeight(1);
     fill(0);
     textSize(25);
-    text("Vejret lige nu:", xpos+10, 75);
+   // text("Vejret lige nu:", xpos+10, 75);
     text(vejrgrader+" grader", xpos+10, 105);
     text(vejrstatus, xpos+10, 130);
     textSize(50);
-    if(vejrstatus == "Skyet"){
-      image();
-    } else if (vejrstatus == "Regnbyer"){
-      image();
-    }else if (vejrstatus == "Nogen sol"){
-      image();
-    }else if (vejrstatus == "Sol"){
-      image();
+    if (vejrstatus.length() == 5) {
+  //    println("test");
+      image(Skyet, xpos+85, 40);
+    } else if (vejrstatus.length() == 8) {
+      image(Regnbyer, xpos+110, 40);
+    } else if (vejrstatus.length() == 9) {
+      image(Nogen_sol, xpos+110, 40);
+    } else if (vejrstatus.length() == 3) {
+      image(Sol, xpos+110, 40);
     }
   }
 

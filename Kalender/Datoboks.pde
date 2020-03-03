@@ -94,7 +94,7 @@ class Boks {
 
   void update() {
 
-    if (withinRect()) {
+    if (withinRect() && marked_date != 0 && bgrunmode == 0) {
       hover = true;
     }
 

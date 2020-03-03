@@ -37,6 +37,7 @@ BufferedReader reader;
 PImage birthday, work, travel, party, sport, homework;
 String dataWemos = "";
 String kortNum = "0";
+int clickcounter;
 
 
 void setup() {
@@ -101,6 +102,9 @@ void draw() {
     bg.display();
     bg.update();
   }
+  
+  println(clickcounter);
+  
   /*
     // Ekstra ting vi legede med
    // Regn animation

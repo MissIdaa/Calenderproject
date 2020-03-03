@@ -5,7 +5,7 @@ class Bruger {
   Bruger(String tempName) {
     name = tempName;
     myFont = createFont("Cooper Black", 35);
-    Font = createFont("SansSerif",30);
+    Font = createFont("SansSerif", 30);
   }
 
   void display() {
