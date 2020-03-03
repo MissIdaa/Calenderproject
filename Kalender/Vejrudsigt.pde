@@ -2,9 +2,15 @@ class Vejrudsigt {
   String dataWemos = "Intet endnu"; 
   String vejrgrader;
   String vejrstatus;
-  int xpos = 1465;
+  int xpos = 1465+50+50;
+  
+  PImage Skyet, Regnbyer, Nogen_sol, Sol;
+  
   Vejrudsigt() {
-
+Skyet = loadImage("Skyet.png");
+Regnbyer = loadImage("Regnbyer.png");
+Nogen_sol = loadImage("Nogen_sol.png");
+Sol = loadImage("Sol.png");
 
     vejrdata();
   }
@@ -12,13 +18,22 @@ class Vejrudsigt {
   void display() {
     // Boksen og dens indhold vises
     fill(255);
-    rect(xpos, 50, 200, 100, 10);
+    rect(xpos, 50, 250, 100, 10);
     fill(0);
     textSize(25);
-    text("Vejret lige nu:", xpos+20, 75);
+    text("Vejret lige nu:", xpos+10, 75);
     text(vejrgrader+" grader", xpos+10, 105);
     text(vejrstatus, xpos+10, 130);
     textSize(50);
+    if(vejrstatus == "Skyet"){
+      image();
+    } else if (vejrstatus == "Regnbyer"){
+      image();
+    }else if (vejrstatus == "Nogen sol"){
+      image();
+    }else if (vejrstatus == "Sol"){
+      image();
+    }
   }
 
   // Datamining for vejrstatus, grader osv
